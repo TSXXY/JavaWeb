@@ -14,15 +14,15 @@
 </head>
 <link rel="stylesheet" href="../layui-v2.6.8/layui/css/layui.css">
 <body>
-<%
-    Page<Film> page1 = (Page<Film>) request.getAttribute("page");
-    Integer pageTotalCount = page1.getPageTotalCount();
-    Integer pageNo = page1.getPageNo();
-    Integer pageSize = page1.getPageSize();
-    List<Film> items = page1.getItems();
-    Integer pageTotal = page1.getPageTotal();
+<%--<%--%>
+<%--    Page<Film> page1 = (Page<Film>) request.getAttribute("page");--%>
+<%--    Integer pageTotalCount = page1.getPageTotalCount();--%>
+<%--    Integer pageNo = page1.getPageNo();--%>
+<%--    Integer pageSize = page1.getPageSize();--%>
+<%--    List<Film> items = page1.getItems();--%>
+<%--    Integer pageTotal = page1.getPageTotal();--%>
 
-%>
+<%--%>--%>
 <table class="layui-hide" id="test"></table>
 <script type="text/html" id="checkboxTpl">
     <button type="button" class="layui-btn layui-btn-normal">编辑</button>
@@ -36,7 +36,7 @@
 
         table.render({
             elem: '#test'
-            , url: ${requestScope.page.items}
+            , url: "http://localhost:8080/filmServlet?action=pages"
             , cellMinWidth: 80
             , cols: [[
                 {field: 'id', title: 'ID', width: 100, unresize: true, sort: true}

@@ -2,9 +2,12 @@ package com.tan.javaweb.servlet;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.List;
 
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tan.javaweb.pojo.Film;
 import com.tan.javaweb.pojo.Page;
 import com.tan.javaweb.service.FilmService;
@@ -23,12 +26,23 @@ public class FilmServlet extends BaseServlet {
         doPost(request,response);
     }
 
-    public void getFilmListByPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        int pageNo = WebUtils.parseInt(request.getParameter("pageNo"), 1);
-        int pageSize = WebUtils.parseInt(request.getParameter("pageSize"), 100);
+    public void pages(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        HashMap<String, Object> stringObjectHashMap = new HashMap<>();
+        int pageNo = WebUtils.parseInt(request.getParameter("page"), 1);
+        int pageSize = WebUtils.parseInt(request.getParameter("limit"), 100);
         Page<Film> page = filmService.getFilmListByPage(pageNo,pageSize);
-        request.setAttribute("page",page);
-        request.getRequestDispatcher("/pages/test.jsp").forward(request,response);
+
+        stringObjectHashMap.put("code",0);
+        stringObjectHashMap.put("msg","ok");
+        stringObjectHashMap.put("count",page.getPageTotal());
+        stringObjectHashMap.put("data",page.getItems());
+//        request.setAttribute("page",page);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = objectMapper.writeValueAsString(stringObjectHashMap);
+//        request.setAttribute("data",s);
+        response.getWriter().write(s);
+//        request.getRequestDispatcher("/pages/test.jsp").forward(request,response);
 
 
     }
