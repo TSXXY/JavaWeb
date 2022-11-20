@@ -2,6 +2,7 @@ package com.tan.javaweb.dao;
 
 
 import com.tan.javaweb.pojo.Film;
+import com.tan.javaweb.pojo.Page;
 
 import java.util.List;
 
@@ -13,4 +14,47 @@ public interface FilmDao {
      * @return
      */
     public List<Film> getFilmList();
+
+    /**
+     * 添加数据
+     * @param film
+     * @return
+     */
+    public int addFilm(Film film);
+
+    /**
+     * 根据id删除数据
+     * @param id
+     * @return
+     */
+    public int delFilmById(int id);
+
+    /**
+     * 修改数据
+     * @param film
+     * @return
+     */
+    public int updateFilm(Film film);
+
+    /**
+     * 通过id查询一条数据
+     * @param id
+     * @return
+     */
+    public Film getFilmById(int id);
+
+
+    /**
+     * 查询总条数
+     * @return
+     */
+    Integer queryForPageTotalCount();
+
+    /**
+     * 查询分页数据
+     * @param begin
+     * @param pageSize
+     * @return
+     */
+    List<Film> queryForPageItems(int begin, int pageSize);
 }

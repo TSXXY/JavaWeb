@@ -1,6 +1,5 @@
 package com.tan.javaweb.utils;
 
-import com.tan.javaweb.utils.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
