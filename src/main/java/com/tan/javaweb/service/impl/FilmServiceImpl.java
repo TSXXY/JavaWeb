@@ -51,7 +51,7 @@ public class FilmServiceImpl implements FilmService {
         page.setPageTotal(pageTotal);
 
 
-        int begin = (page.getPageNo() -1) *pageSize;
+        int begin = (page.getPageNo() -1) * pageSize;
         List<Film> films = filmDao.queryForPageItems(begin,pageSize);
         page.setItems(films);
 

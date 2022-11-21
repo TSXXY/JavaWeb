@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-    <jsp:forward page="/filmServlet?action=getFilmList"></jsp:forward>
+    <jsp:forward page="/pages/page.jsp"></jsp:forward>
 </body>
 </html>

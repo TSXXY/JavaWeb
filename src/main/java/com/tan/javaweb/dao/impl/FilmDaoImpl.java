@@ -16,7 +16,7 @@ public class FilmDaoImpl extends BaseDao implements FilmDao {
 
     @Override
     public int addFilm(Film film) {
-        String sql = "INSERT INTO film(name,episode,type) VALUES (?,?,?)";
+        String sql = "INSERT INTO film(name,episode,type,Introduction,cover,release_time) VALUES (?,?,?,?,?,?)";
         return update(sql, film.getName(), film.getEpisode(), film.getType());
     }
 
@@ -28,8 +28,8 @@ public class FilmDaoImpl extends BaseDao implements FilmDao {
 
     @Override
     public int updateFilm(Film film) {
-        String sql = "UPDATE film SET `name`=?,episode=?,type=? WHERE id =?";
-        return update(sql, film.getName(), film.getEpisode(), film.getType(), film.getId());
+        String sql = "UPDATE film SET `name`=?,episode=?,type=?,Introduction=?,cover=?,release_time=? WHERE id =?";
+        return update(sql, film.getName(), film.getEpisode(), film.getType(),film.getIntroduction(),film.getCover(),film.getRelease_time(), film.getId());
     }
 
     @Override

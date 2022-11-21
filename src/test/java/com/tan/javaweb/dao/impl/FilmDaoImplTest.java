@@ -12,6 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FilmDaoImplTest {
     FilmDao filmDao = new FilmDaoImpl();
+
+    @Test
+    void  test(){
+        Film filmById = filmDao.getFilmById(23276);
+        System.out.println(filmById);
+    }
+
     @Test
     void queryForPageTotalCount() {
         Integer integer = filmDao.queryForPageTotalCount();
@@ -20,7 +27,7 @@ class FilmDaoImplTest {
 
     @Test
     void queryForPageItems() {
-        List<Film> films = filmDao.queryForPageItems(1, 100);
+        List<Film> films = filmDao.queryForPageItems(2, 100);
         for (Film film : films) {
             System.out.println(film);
         }

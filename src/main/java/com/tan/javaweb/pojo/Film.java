@@ -18,4 +18,10 @@ public class Film {
     private String episode;
     //类型
     private String type;
+    //简介
+    private String Introduction;
+    //封面
+    private String cover;
+    //放送日期
+    private String release_time;
 }
