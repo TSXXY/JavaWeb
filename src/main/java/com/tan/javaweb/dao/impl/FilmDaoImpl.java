@@ -17,7 +17,7 @@ public class FilmDaoImpl extends BaseDao implements FilmDao {
     @Override
     public int addFilm(Film film) {
         String sql = "INSERT INTO film(name,episode,type,Introduction,cover,release_time) VALUES (?,?,?,?,?,?)";
-        return update(sql, film.getName(), film.getEpisode(), film.getType());
+        return update(sql, film.getName(), film.getEpisode(), film.getType(),film.getIntroduction(),film.getCover(),film.getRelease_time());
     }
 
     @Override
@@ -49,6 +49,20 @@ public class FilmDaoImpl extends BaseDao implements FilmDao {
     public List<Film> queryForPageItems(int begin, int pageSize) {
         String sql = "SELECT * FROM film limit ?,?";
         return queryForList(Film.class,sql,begin,pageSize);
+    }
+
+    @Override
+    public List<Film> queryFilmByName(String name,int begin,int pageSize) {
+        String sql = "SELECT * FROM film WHERE `name` LIKE ? limit ?,?";
+        return queryForList(Film.class,sql,name,begin,pageSize);
+    }
+
+    @Override
+    public int count(String name) {
+        String sql = "SELECT  COUNT(*) FROM film WHERE `name` LIKE ?";
+        Number count =(Number) queryForSingleValue(sql,name);
+        return count.intValue();
+
     }
 
 }

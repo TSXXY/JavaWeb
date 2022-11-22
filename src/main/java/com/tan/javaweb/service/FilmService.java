@@ -17,4 +17,8 @@ public interface FilmService {
     public Film getFilmById(int id);
 
     Page<Film> getFilmListByPage(int pageNo, int pageSize);
+
+    List<Film> queryFilmByName(String name,int pageNo,int pageSize);
+
+    int count(String name);
 }

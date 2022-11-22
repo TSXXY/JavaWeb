@@ -21,8 +21,8 @@ class FilmDaoImplTest {
 
     @Test
     void queryForPageTotalCount() {
-        Integer integer = filmDao.queryForPageTotalCount();
-        System.out.println(integer);
+        List<Film> films = filmDao.queryFilmByName("%游戏王%", 1, 20);
+        System.out.println(films.size());
     }
 
     @Test

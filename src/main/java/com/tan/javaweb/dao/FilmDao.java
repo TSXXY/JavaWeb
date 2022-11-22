@@ -57,4 +57,13 @@ public interface FilmDao {
      * @return
      */
     List<Film> queryForPageItems(int begin, int pageSize);
+
+    /**
+     * 根据作品名称进行模糊查询
+     * @param name
+     * @return
+     */
+    List<Film> queryFilmByName(String name,int begin,int pageSize);
+
+    int count(String name);
 }

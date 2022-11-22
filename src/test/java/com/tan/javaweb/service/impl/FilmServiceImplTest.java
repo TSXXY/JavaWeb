@@ -26,4 +26,14 @@ class FilmServiceImplTest {
         long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime + "ms");
     }
+
+    @Test
+    void test(){
+        List<Film> films = filmService.queryFilmByName("游戏王", 1, 20);
+        int i = 0;
+        for (Film film : films) {
+            System.out.println((i++)+"::::::::::::"+film);
+
+        }
+    }
 }

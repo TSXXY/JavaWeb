@@ -57,4 +57,18 @@ public class FilmServiceImpl implements FilmService {
 
         return page;
     }
+
+    @Override
+    public List<Film> queryFilmByName(String name,int pageNo,int pageSize) {
+        name = "%"+name+"%";
+
+        int begin = (pageNo-1) * pageSize;
+        return filmDao.queryFilmByName(name,begin,pageSize);
+    }
+
+    @Override
+    public int count(String name) {
+        name = "%"+name+"%";
+        return filmDao.count(name);
+    }
 }

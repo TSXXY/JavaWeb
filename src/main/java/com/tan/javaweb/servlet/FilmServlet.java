@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +45,35 @@ public class FilmServlet extends BaseServlet {
 
 
     }
+    public void updateFilm(HttpServletRequest request,HttpServletResponse response){
+        Film copy = WebUtils.copy(request.getParameterMap(), new Film());
+        filmService.updateFilm(copy);
 
+    }
+
+    public void addFilm(HttpServletRequest request,HttpServletResponse response){
+        Film copy = WebUtils.copy(request.getParameterMap(), new Film());
+        filmService.addFilm(copy);
+    }
+
+    public void queryFilmByName(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        HashMap<String,Object> objectObjectHashMap = new HashMap<>();
+        String text = request.getParameter("text");
+        int pageNo = WebUtils.parseInt(request.getParameter("page"), 1);
+        int pageSize = WebUtils.parseInt(request.getParameter("limit"), 100);
+        List<Film> films = filmService.queryFilmByName(text,pageNo,pageSize);
+        objectObjectHashMap.put("data", films);
+        objectObjectHashMap.put("code",0);
+        objectObjectHashMap.put("count",filmService.count(text));
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = objectMapper.writeValueAsString(objectObjectHashMap);
+        response.getWriter().write(s);
+    }
+
+    public void delFilmById(HttpServletRequest request,HttpServletResponse response){
+        String id = request.getParameter("id");
+        filmService.delFilmById(WebUtils.parseInt(id,0));
+    }
 
     public void getFilmList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Film> filmList = filmService.getFilmList();
