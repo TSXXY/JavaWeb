@@ -31,6 +31,8 @@
             <artifactId>commons-dbutils</artifactId>
             <version>1.7</version>
         </dependency>
+
+
         <!--Bean处理工具包-->
         <dependency>
             <groupId>commons-beanutils</groupId>

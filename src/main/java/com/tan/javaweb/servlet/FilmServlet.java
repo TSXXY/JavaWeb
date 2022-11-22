@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,12 +58,20 @@ public class FilmServlet extends BaseServlet {
     public void queryFilmByName(HttpServletRequest request,HttpServletResponse response) throws IOException {
         HashMap<String,Object> objectObjectHashMap = new HashMap<>();
         String text = request.getParameter("text");
-        int pageNo = WebUtils.parseInt(request.getParameter("page"), 1);
+        int count = filmService.count(text);
         int pageSize = WebUtils.parseInt(request.getParameter("limit"), 100);
+        int upperLimit =count / pageSize;
+        if (count % pageSize != 0){
+            upperLimit+=1;
+        }
+        int pageNo = WebUtils.parseInt(request.getParameter("page"), 1);
+        if (pageNo > upperLimit){
+            pageNo = upperLimit;
+        }
         List<Film> films = filmService.queryFilmByName(text,pageNo,pageSize);
         objectObjectHashMap.put("data", films);
         objectObjectHashMap.put("code",0);
-        objectObjectHashMap.put("count",filmService.count(text));
+        objectObjectHashMap.put("count",count);
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(objectObjectHashMap);
         response.getWriter().write(s);
